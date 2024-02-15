@@ -1,9 +1,7 @@
-
-
 pandas
 plotly
 streamlit
-
+readxl
 
 
 
