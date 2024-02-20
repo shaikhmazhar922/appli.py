@@ -1,6 +1,7 @@
-from openpyxl import Workbook
-import pandas as pd  # pip install pandas openpyxl
+import pandas as pd
+import numpy as np   # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
+import matplotlib.pyplot as plt
 import streamlit as st  # pip install streamlit
 import plotly
 
@@ -8,16 +9,6 @@ st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout
 
 st.title("SUPER MARKET DASHBOARD")
 st.markdown("##")
-df = pd.read_excel(
-        io="supermarkt_sales.xlsx",
-        engine="openpyxl",
-        sheet_name="Sales",
-        skiprows=3,
-         
-        usecols="B:R",
-        nrows=300,
-    )
-# ---- SIDEBAR ----
 
 with st.sidebar:
     st.subheader("Description")
@@ -76,59 +67,6 @@ with left_column:
 
 st.markdown("""---""")
 
-# SALES BY PRODUCT LINE [BAR CHART]
-sales_by_product_line = df_selection.groupby(by=["Product line"])[["Total"]].sum().sort_values(by="Total")
-
-
-fig_product_sales = px.bar(
-    sales_by_product_line,
-    x="Total",
-    y=sales_by_product_line.index,
-    orientation="h",
-    title="<b>Sales by Product Line</b>",
-    color_discrete_sequence=["#0083B8"] * len(sales_by_product_line),
-    template="plotly_white",
-)
-
-fig_product_sales.update_layout(
-    plot_bgcolor="rgba(0,0,0,0)",
-    xaxis=(dict(showgrid=False))
-)
-
-
-
-
-
-
-
-
-
-
-fig_product_sales = px.bar(
-    sales_by_product_line,
-    x="Total",
-    y=sales_by_product_line.index,
-    orientation="h",
-    title="<b>Sales by Product Line</b>",
-    color_discrete_sequence=["#0083B8"] * len(sales_by_product_line),
-    template="plotly_white",
-)
-
-fig_product_sales.update_layout(
-    plot_bgcolor="rgba(0,0,0,0)",
-    xaxis=(dict(showgrid=False))
-)
-left_column, right_column = st.columns(2)
-left_column.plotly_chart(fig_product_sales, use_container_width=True)
-
-hide_st_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_st_style, unsafe_allow_html=True)
 
 pie chart of gross income by City
     with col2:
