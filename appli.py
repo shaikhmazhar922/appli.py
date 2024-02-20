@@ -130,13 +130,6 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-pie chart of Sales by segment
-    with col2:
-        st.subheader("Sales by Segment")
-        category_sales = filtered_df.groupby('Segment')['Sales'].sum().reset_index()
-        fig = px.pie(category_sales, values='Sales', names='Segment')
-        st.plotly_chart(fig, use_container_width=True)
-
 pie chart of gross income by City
     with col2:
         st.subheader("gross income by City")
